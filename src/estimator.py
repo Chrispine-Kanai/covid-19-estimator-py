@@ -2,17 +2,17 @@
 #   return data
 
 data = {
-"region": {
-"name": "Africa",
-"avgAge": 19.7,
-"avgDailyIncomeInUSD": 5,
-"avgDailyIncomePopulation": 0.71
-},
-"periodType": "days",
-"timeToElapse": 38,
-"reportedCases": 2747,
-"population": 66622705,
-"totalHospitalBeds": 1380614
+  "region": {
+  "name": "Africa",
+  "avgAge": 19.7,
+  "avgDailyIncomeInUSD": 5,
+  "avgDailyIncomePopulation": 0.71
+  },
+  "periodType": "days",
+  "timeToElapse": 38,
+  "reportedCases": 2747,
+  "population": 66622705,
+  "totalHospitalBeds": 1380614
 }
 
 def impactInfectionsByRequestTime():
@@ -50,21 +50,19 @@ def severeImpactInfectionsByRequestTime():
     return infectionsByRequestedTime 
 
 def estimator(data):
-  impact = {
-  "currentlyInfected": int(data.get("reportedCases") * 10),
-  "infectionsByRequestTime": impactInfectionsByRequestTime()
-  }
-  severeImpact = {
-  "currentlyInfected": int(data.get("reportedCases") * 50),
-  "infectionsByRequestTime": severeImpactInfectionsByRequestTime()
-  }
+  _data = data
 
-  output = {
-  'data': data,
-  'impact': impact, 
-  'severeImpact': severeImpact
+  return{
+    'data': _data,
+
+    'impact': {
+    "currentlyInfected": _data.get("reportedCases") * 10,
+    "infectionsByRequestedTime": impactInfectionsByRequestTime()
+    },
+
+    'severeImpact': {
+    "currentlyInfected": data.get("reportedCases") * 50,
+    "infectionsByRequestedTime": severeImpactInfectionsByRequestTime()
+    }
   }
-  return output
-
-print(estimator(data))
-
+  
