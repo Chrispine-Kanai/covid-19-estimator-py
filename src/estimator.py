@@ -34,15 +34,15 @@ def estimateData(data):
 
 def normalise_Duration(data):
 
-    if data["periodType"] is "weeks":
+    if data["periodType"] == "weeks":
         days = data["timeToElapse"] * 7
         return days
 
-    if data["periodType"] is "months":
+    if data["periodType"] == "months":
         days = data["timeToElapse"] * 30
         return days
 
-    if data["periodType"] is "days":
+    if data["periodType"] == "days":
         days = data["timeToElapse"]
         return days
 
