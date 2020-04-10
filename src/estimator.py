@@ -58,18 +58,18 @@ def severeImpactInfectionsByRequestTime():
         return infectionsByRequestedTime 
 
 def estimator(data):
-    _data = data
+    data = data
 
     return{
-      'data': _data,
+      'data': data,
 
       'impact': {
-        "currentlyInfected": _data.get("reportedCases") * 10,
+        "currentlyInfected": data["reportedCases"] * 10,
         "infectionsByRequestedTime": impactInfectionsByRequestTime()
       },
 
       'severeImpact': {
-        "currentlyInfected": data.get("reportedCases") * 50,
+        "currentlyInfected": data["reportedCases"] * 50,
         "infectionsByRequestedTime": severeImpactInfectionsByRequestTime()
       }
 }
