@@ -50,7 +50,7 @@ def severeImpactInfectionsByRequestTime():
       infectionsByRequestedTime = int(currentlyInfected * (2 ** factor))
       return infectionsByRequestedTime 
 
-def estimator(**data):
+def estimator(data):
     _data = data
 
     return{
