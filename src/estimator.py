@@ -65,12 +65,15 @@ def estimator(data):
 
       'impact': {
         "currentlyInfected": float(data["reportedCases"] * 10),
-        "infectionsByRequestedTime": impactInfectionsByRequestTime()
+        "infectionsByRequestedTime": impactInfectionsByRequestTime(),
       },
 
       'severeImpact': {
         "currentlyInfected": float(data["reportedCases"] * 50),
-        "infectionsByRequestedTime": severeImpactInfectionsByRequestTime()
-      }
+        "infectionsByRequestedTime": severeImpactInfectionsByRequestTime(),
+      },
     }
     return estimate
+
+
+print(estimator(data))
