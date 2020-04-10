@@ -7,8 +7,8 @@ data = {
     "avgDailyIncomeInUSD": 5,
     "avgDailyIncomePopulation": 0.71
   },
-  "periodType": "days",
-  "timeToElapse": 38,
+  "periodType": "months",
+  "timeToElapse": 1,
   "reportedCases": 2747,
   "population": 66622705,
   "totalHospitalBeds": 1380614
@@ -34,15 +34,15 @@ def estimateData(data):
 
 def normalise_Duration(data):
 
-    if data["periodType"] == "weeks":
+    if data["periodType"] is "weeks":
         days = data["timeToElapse"] * 7
         return days
 
-    if data["periodType"] == "months":
+    if data["periodType"] is "months":
         days = data["timeToElapse"] * 30
         return days
 
-    if data["periodType"] == "days":
+    if data["periodType"] is "days":
         days = data["timeToElapse"]
         return days
 
