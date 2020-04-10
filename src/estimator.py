@@ -8,72 +8,88 @@ data = {
     "avgDailyIncomePopulation": 0.71
   },
   "periodType": "days",
-  "timeToElapse": 58,
-  "reportedCases": 674,
+  "timeToElapse": 38,
+  "reportedCases": 2747,
   "population": 66622705,
   "totalHospitalBeds": 1380614
 }
 
 
-def impactInfectionsByRequestTime():
-    currentlyInfected = int(data.get("reportedCases") * 10)
+def estimateData(data):
 
-    if data["periodType"] == "weeks":
-        timeToElapseInDays = data["timeToElapse"] * 7
-        factor = math.trunc(timeToElapseInDays / 3)
-        infectionsByRequestedTime = currentlyInfected * (2 ** factor)
-        return infectionsByRequestedTime 
-
-    if data["periodType"] == "months":
-        timeToElapseInDays = data["timeToElapse"] * 30
-        factor = math.trunc(timeToElapseInDays / 3)
-        infectionsByRequestedTime = currentlyInfected * (2 ** factor)
-        return infectionsByRequestedTime
-
-    if data["periodType"] == "days":
-        factor = math.trunc(data["timeToElapse"] / 3)
-        infectionsByRequestedTime = int(currentlyInfected * (2 ** factor))
-        return infectionsByRequestedTime 
-
-
-
-def severeImpactInfectionsByRequestTime():
-    currentlyInfected = int(data.get("reportedCases") * 50)
-
-    if data["periodType"] == "weeks":
-        timeToElapseInDays = data["timeToElapse"] * 7
-        factor = math.trunc(timeToElapseInDays / 3)
-        infectionsByRequestedTime = int(currentlyInfected * (2 ** factor))
-        return infectionsByRequestedTime 
-
-    if data["periodType"] == "months":
-        timeToElapseInDays = data["timeToElapse"] * 30
-        factor = math.trunc(timeToElapseInDays / 3)
-        infectionsByRequestedTime = currentlyInfected * (2 ** factor)
-        return infectionsByRequestedTime
-
-    if data["periodType"] == "days":
-        factor = math.trunc(data["timeToElapse"] / 3)
-        infectionsByRequestedTime = int(currentlyInfected * (2 ** factor))
-        return infectionsByRequestedTime 
-
-def estimator(data):
-    data = data
+    impactCurrentlyInfected = data['reportedCases'] * 10
+    severeImpactCurrentlyInfected = data['reportedCases'] * 50
 
     estimate = {
-      'data': data,
-
       'impact': {
-        "currentlyInfected": float(data["reportedCases"] * 10),
-        "infectionsByRequestedTime": impactInfectionsByRequestTime(),
+        'currentlyInfected': impactCurrentlyInfected
       },
-
       'severeImpact': {
-        "currentlyInfected": float(data["reportedCases"] * 50),
-        "infectionsByRequestedTime": severeImpactInfectionsByRequestTime(),
-      },
+        'currentlyInfected': severeImpactCurrentlyInfected
+      }
     }
+
     return estimate
+
+
+def normalise_Duration(data):
+
+    if data["periodType"] == "weeks":
+        days = data["timeToElapse"] * 7
+        return days
+
+    if data["periodType"] == "months":
+        days = data["timeToElapse"] * 30
+        return days
+
+    if data["periodType"] == "days":
+        days = data["timeToElapse"]
+        return days
+
+
+def estimationByRequestedTime(data):
+
+    days = normalise_Duration(data)
+    estimateInfectedCases = estimateData(data)
+
+
+    impactInfectionsByRequestTime = (estimateInfectedCases['impact']['currentlyInfected'] * (2 ** (days // 3)))
+
+    severeImpactInfectionsByRequestTime = estimateInfectedCases['severeImpact']['currentlyInfected'] * (2 ** (days // 3))
+
+    estimateInfectedCasesByTime = {
+      'impact': {
+        'InfectionsByRequestedTime': impactInfectionsByRequestTime
+      },
+      'severeImpact': {
+        'InfectionsByRequestedTime': severeImpactInfectionsByRequestTime
+      }
+    }
+    
+    return estimateInfectedCasesByTime
+
+
+
+def estimator(data):
+
+    estimate = estimationByRequestedTime(data)
+    estimateInfections = estimateData(data)
+
+    data = {
+        'data': data,
+
+        'impact': {
+          'currentlyInfected': estimateInfections['impact']['currentlyInfected'],
+          'InfectionsByRequestedTime': estimate['impact']['InfectionsByRequestedTime']
+        },
+
+        'severeImpact': {
+          'currentlyInfected': estimateInfections['severeImpact']['currentlyInfected'],
+          'InfectionsByRequestedTime': estimate['severeImpact']['InfectionsByRequestedTime']
+        }
+    }
+
+    return data
 
 
 print(estimator(data))
