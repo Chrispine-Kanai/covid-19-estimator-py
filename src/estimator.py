@@ -64,17 +64,13 @@ def estimator(data):
       'data': data,
 
       'impact': {
-        "currentlyInfected": data["reportedCases"] * 10,
+        "currentlyInfected": float(data["reportedCases"] * 10),
         "infectionsByRequestedTime": impactInfectionsByRequestTime()
       },
 
       'severeImpact': {
-        "currentlyInfected": data["reportedCases"] * 50,
+        "currentlyInfected": float(data["reportedCases"] * 50),
         "infectionsByRequestedTime": severeImpactInfectionsByRequestTime()
       }
     }
     return estimate
-
-
-
-print(estimator(data))
