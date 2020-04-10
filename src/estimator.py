@@ -35,16 +35,13 @@ def estimateData(data):
 def normalise_Duration(data):
 
     if data["periodType"] == "weeks":
-        days = data["timeToElapse"] * 7
-        return days
-
+        return data["timeToElapse"] * 7
+        
     if data["periodType"] == "months":
-        days = data["timeToElapse"] * 30
-        return days
+        return data["timeToElapse"] * 30
 
     if data["periodType"] == "days":
-        days = data["timeToElapse"]
-        return days
+        return data["timeToElapse"]
 
 
 def estimationByRequestedTime(data):
@@ -53,9 +50,9 @@ def estimationByRequestedTime(data):
     estimateInfectedCases = estimateData(data)
 
 
-    impactInfectionsByRequestTime = (estimateInfectedCases['impact']['currentlyInfected'] * (2 ** (days // 3)))
+    impactInfectionsByRequestTime = math.floor((estimateInfectedCases['impact']['currentlyInfected'] * (2 ** (days / 3))))
 
-    severeImpactInfectionsByRequestTime = estimateInfectedCases['severeImpact']['currentlyInfected'] * (2 ** (days // 3))
+    severeImpactInfectionsByRequestTime = math.floor(estimateInfectedCases['severeImpact']['currentlyInfected'] * (2 ** (days / 3)))
 
     estimateInfectedCasesByTime = {
       'impact': {
