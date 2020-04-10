@@ -60,7 +60,7 @@ def severeImpactInfectionsByRequestTime():
 def estimator(data):
     data = data
 
-    return{
+    estimate = {
       'data': data,
 
       'impact': {
@@ -72,7 +72,9 @@ def estimator(data):
         "currentlyInfected": data["reportedCases"] * 50,
         "infectionsByRequestedTime": severeImpactInfectionsByRequestTime()
       }
-}
+    }
+    return estimate
+
 
 
 print(estimator(data))
