@@ -24,13 +24,13 @@ def impactEstimations(data):
 
     severeCasesByRequestedTime = math.floor(0.15 * infectionsByRequestedTime)
 
-    hospitalBedsByRequestedTime = int(0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime
+    hospitalBedsByRequestedTime = math.trunc((0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime)
 
     casesForICUByRequestedTime = int(0.05 * infectionsByRequestedTime)
 
     casesForVentilatorsByRequestedTime = int(0.02 * infectionsByRequestedTime)
 
-    dollarsInFlight = math.floor((infectionsByRequestedTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) / days)
+    dollarsInFlight = math.trunc((infectionsByRequestedTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) // days)
 
     return [currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime, casesForICUByRequestedTime, casesForVentilatorsByRequestedTime, dollarsInFlight]
 
@@ -45,13 +45,13 @@ def severeImpactEstimations(data):
 
     severeCasesByRequestedTime = math.floor(0.15 * infectionsByRequestedTime)
 
-    hospitalBedsByRequestedTime = int(0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime
+    hospitalBedsByRequestedTime = math.trunc((0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime)
 
     casesForICUByRequestedTime = int(0.05 * infectionsByRequestedTime)
 
     casesForVentilatorsByRequestedTime = int(0.02 * infectionsByRequestedTime)
 
-    dollarsInFlight = math.floor(( 562585600 * 0.73 * 4) / 38)
+    dollarsInFlight = math.trunc((infectionsByRequestedTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) / days)
 
     return [currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime, casesForICUByRequestedTime, casesForVentilatorsByRequestedTime, dollarsInFlight]
 
