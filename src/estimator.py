@@ -24,9 +24,9 @@ def impactEstimations(data):
 
     severeCasesByRequestedTime = math.floor(0.15 * infectionsByRequestTime)
 
-    hospitalBedsByRequestedTime = math.trunc(0.35 * data['totalHospitalBeds']) - \
-    severeCasesByRequestedTime
+    hospitalBedsByRequestedTime = round(0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime
 
+    print(round(0.35 *678874) - 16877568)
     return [currentlyInfected, infectionsByRequestTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime]
 
 
@@ -40,8 +40,7 @@ def severeImpactEstimations(data):
 
     severeCasesByRequestedTime = math.floor(0.15 * infectionsByRequestTime)
 
-    hospitalBedsByRequestedTime = math.trunc(0.35 * data['totalHospitalBeds']) - \
-    severeCasesByRequestedTime + 1
+    hospitalBedsByRequestedTime = round(0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime
 
     return [currentlyInfected, infectionsByRequestTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime]
 
