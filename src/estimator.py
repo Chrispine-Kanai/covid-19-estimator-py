@@ -4,8 +4,8 @@ data = {
     "region": {
         "name": "Africa",
         "avgAge": 19.7,
-        "avgDailyIncomeInUSD": 5,
-        "avgDailyIncomePopulation": 0.71
+        "avgDailyIncomeInUSD": 4,
+        "avgDailyIncomePopulation": 0.73
     },
     "periodType": "days",
     "timeToElapse": 38,
@@ -20,14 +20,19 @@ def impactEstimations(data):
 
     currentlyInfected = data['reportedCases'] * 10
 
-    infectionsByRequestTime = math.floor(currentlyInfected * (2 ** (days // 3)))
+    infectionsByRequestedTime = math.floor(currentlyInfected * (2 ** (days // 3)))
 
-    severeCasesByRequestedTime = math.floor(0.15 * infectionsByRequestTime)
+    severeCasesByRequestedTime = math.floor(0.15 * infectionsByRequestedTime)
 
-    hospitalBedsByRequestedTime = round(0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime
+    hospitalBedsByRequestedTime = int(0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime
 
-    print(round(0.35 *678874) - 16877568)
-    return [currentlyInfected, infectionsByRequestTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime]
+    casesForICUByRequestedTime = int(0.05 * infectionsByRequestedTime)
+
+    casesForVentilatorsByRequestedTime = int(0.02 * infectionsByRequestedTime)
+
+    dollarsInFlight = math.floor((infectionsByRequestedTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) / days)
+
+    return [currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime, casesForICUByRequestedTime, casesForVentilatorsByRequestedTime, dollarsInFlight]
 
 
 def severeImpactEstimations(data):
@@ -36,13 +41,19 @@ def severeImpactEstimations(data):
 
     currentlyInfected = data['reportedCases'] * 50
 
-    infectionsByRequestTime = math.floor(currentlyInfected * (2 ** (days // 3)))
+    infectionsByRequestedTime = math.floor(currentlyInfected * (2 ** (days // 3)))
 
-    severeCasesByRequestedTime = math.floor(0.15 * infectionsByRequestTime)
+    severeCasesByRequestedTime = math.floor(0.15 * infectionsByRequestedTime)
 
-    hospitalBedsByRequestedTime = round(0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime
+    hospitalBedsByRequestedTime = int(0.35 * data['totalHospitalBeds']) - severeCasesByRequestedTime
 
-    return [currentlyInfected, infectionsByRequestTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime]
+    casesForICUByRequestedTime = int(0.05 * infectionsByRequestedTime)
+
+    casesForVentilatorsByRequestedTime = int(0.02 * infectionsByRequestedTime)
+
+    dollarsInFlight = math.floor(( 562585600 * 0.73 * 4) / 38)
+
+    return [currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime, casesForICUByRequestedTime, casesForVentilatorsByRequestedTime, dollarsInFlight]
 
 
 def normalise_Duration(data):
@@ -70,6 +81,9 @@ def estimator(data):
             'infectionsByRequestedTime': impactCases[1],
             'severeCasesByRequestedTime': impactCases[2],
             'hospitalBedsByRequestedTime': impactCases[3],
+            'casesForICUByRequestedTime': impactCases[4],
+            'casesForVentilatorsByRequestedTime': impactCases[5],
+            'dollarsInFlight': impactCases[6],
         },
 
         'severeImpact': {
@@ -77,6 +91,9 @@ def estimator(data):
             'infectionsByRequestedTime': severeImpact[1],
             'severeCasesByRequestedTime': severeImpact[2],
             'hospitalBedsByRequestedTime': severeImpact[3],
+            'casesForICUByRequestedTime': severeImpact[4],
+            'casesForVentilatorsByRequestedTime': severeImpact[5],
+            'dollarsInFlight': severeImpact[6],
         }
     }
 
