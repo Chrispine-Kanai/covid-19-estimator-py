@@ -25,7 +25,7 @@ def estimator(request):
     totalHospitalBeds = request.POST.get('data-total-hospital-beds')
     
 
-    output = run([sys.executable,'/home/chrispine/Projects/Andela-Build-for-SDG/covid-19-estimator-py/src/estimator.py', name, avgAge, avgDailyIncomeInUSD, avgDailyIncomePopulation, periodType, timeToElapse, reportedCases, population, totalHospitalBeds],shell=False,stdout=PIPE, text=True)
+    output = run([sys.executable,'/home/chrispine/Projects/Andela-Build-for-SDG/covid-19-estimator-py/src/Covid_19_estimator/estimator.py', name, avgAge, avgDailyIncomeInUSD, avgDailyIncomePopulation, periodType, timeToElapse, reportedCases, population, totalHospitalBeds],shell=False,stdout=PIPE, text=True)
     print(output)
     return render(request,'index.html', {'data': output.stdout})
 
