@@ -1,19 +1,36 @@
 import math
 import sys
 
-data = {
+if sys.argv[1]  != None:
+    data = {
+        "region": {
+            "name": (sys.argv[1]),
+            "avgAge": float(sys.argv[2]),
+            "avgDailyIncomeInUSD": float(sys.argv[3]),
+            "avgDailyIncomePopulation": float(sys.argv[4])
+        },
+        "periodType": (sys.argv[5]),
+        "timeToElapse": int(sys.argv[6]),
+        "reportedCases": int(sys.argv[7]),
+        "population": int(sys.argv[8]),
+        "totalHospitalBeds": int(sys.argv[9])
+    }
+else:
+        
+    data = {
     "region": {
-        "name": (sys.argv[1]),
-        "avgAge": float(sys.argv[2]),
-        "avgDailyIncomeInUSD": float(sys.argv[3]),
-        "avgDailyIncomePopulation": float(sys.argv[4])
+        "name": "Africa",
+        "avgAge": 19.7,
+        "avgDailyIncomeInUSD": 4,
+        "avgDailyIncomePopulation": 0.73
     },
-    "periodType": (sys.argv[5]),
-    "timeToElapse": int(sys.argv[6]),
-    "reportedCases": int(sys.argv[7]),
-    "population": int(sys.argv[8]),
-    "totalHospitalBeds": int(sys.argv[9])
+    "periodType": "days",
+    "timeToElapse": 38,
+    "reportedCases": 2747,
+    "population": 92931687,
+    "totalHospitalBeds": 678874
 }
+
 
 def impactEstimations(data):
 
