@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+h5 {
+    padding-top: 30px;
+    color: #0d3cd3;
+}
+
+label {
+    color: #ff4800;
+}
+
+div .input {
+    border: 1px solid #00d9ff;
+    border-radius: 25px;
+}
+
+div .input:focus {
+    border: 1px solid #c300ff;
+    border-radius: 25px;
+    box-shadow: none;
+}
+
+form .submit-button {
+    background-color: #bdd4e7;
+    background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%);
+    border: none;
+    margin-top: 50px;
+    border-radius: 25px; 
+}
+
+form .submit-button:active {
+    background-color: #eec0c6;
+    background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);
+    border: none;
+    margin-top: 50px;
+    border-radius: 25px;
+    box-shadow: none;
+}
+
+form .submit-button:hover {
+    background-color: #eec0c6;
+    background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);
+    border: none;
+    margin-top: 50px;
+    border-radius: 25px;
+}
+
+div .my-card {
+    margin-top: 80px;
+    border-radius: 25px;
+    min-height: 500px;
+}

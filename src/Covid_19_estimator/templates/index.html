@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A novelty COVID-19 infections predictor/estimator ">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" media="screen">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css">
+    <title>COVID-19 infections estimator</title>
+</head>
+<body class="bg-light">
+    <header>
+        <div class="py-5 text-center">
+            <h2>A COVID-19 infections estimator</h2>
+            <p class="lead">A COVID-19 infections estimator that takes in input and makes estimations based on that input.</p>
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="mb-3">Input Your Data:</h4>
+                <h5 class="mb-3">Region Data:</h5>
+                <form action="/estimator" class="align-form" method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="data-name">Region Name</label>
+                        <input type="text" class="form-control input" name="data-name" value="Africa" required>
+                    </div>
+ 
+                    <div class="mb-3">
+                        <label for="data-avg-Age">Average Age</label>
+                        <input type="text" class="form-control input" name="data-avg-Age" value="19.7" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="data-avg-daily-income-in-USD">Average Daily Income</label>
+                        <input type="text" class="form-control input" name="data-avg-daily-income-in-USD" value="4" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="data-avg-daily-income-population">Average Daily Income Population</label>
+                        <input type="number" class="form-control input" name="data-avg-daily-income-population" value="0.73" required>
+                    </div>
+
+                    <h5 class="mb-3">Other Data:</h5>
+
+                    <div class="mb-3">
+                        <label for="periodType">Period Type</label>
+                        <select class="custom-select d-block w-100 input" name="data-period-type" required>
+                        <option value="">Choose Period...</option>
+                        <option value="days" label="days"></option>
+                        <option value="weeks" label="weeks"></option>
+                        <option value="months" label="months"></option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="data-time-to-elapse">Elapse Time</label>
+                        <input type="number" class="form-control input" name="data-time-to-elapse" min="0" placeholder="Enter the elapse time" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="data-reported-cases">Reported Cases</label>
+                        <input type="number" class="form-control input" name="data-reported-cases" min="0" placeholder="Enter the reported cases" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="data-population">Population</label>
+                        <input type="number" class="form-control input" name="data-population" min="0" placeholder="Enter the Population" required>
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="data-total-hospital-beds">Hospital Beds</label>
+                        <input type="number" class="form-control input" name="data-total-hospital-beds" min="0" placeholder="Enter the total number of hospital beds" required>
+                    </div>
+        
+                    <!-- {{data_external}}<br><br> -->
+                    
+                    <!-- {{data}} -->
+                    <button class="btn-primary btn-lg btn-block submit-button" type="submit">Submit Data</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="output">
+                    <h5 style="text-align: center;">Estimate Data:</h5>
+                    <div class="card my-card">
+                        <div class="card-body">
+                            <!-- <pre> -->
+                                {{data}}
+                            <!-- </pre> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2020 Chrispine</p>
+    </footer>
+</body>
+</html>
