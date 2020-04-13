@@ -1,23 +1,7 @@
 import math
 import sys
-
-if sys.argv[1]  != None:
-    data = {
-        "region": {
-            "name": (sys.argv[1]),
-            "avgAge": float(sys.argv[2]),
-            "avgDailyIncomeInUSD": float(sys.argv[3]),
-            "avgDailyIncomePopulation": float(sys.argv[4])
-        },
-        "periodType": (sys.argv[5]),
-        "timeToElapse": int(sys.argv[6]),
-        "reportedCases": int(sys.argv[7]),
-        "population": int(sys.argv[8]),
-        "totalHospitalBeds": int(sys.argv[9])
-    }
-else:
         
-    data = {
+data = {
     "region": {
         "name": "Africa",
         "avgAge": 19.7,
