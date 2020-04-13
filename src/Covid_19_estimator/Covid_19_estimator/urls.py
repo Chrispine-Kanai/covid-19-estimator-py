@@ -26,4 +26,4 @@ urlpatterns = [
     path('', views.index),
     # path('output', views.estimator, name='script'),
     path('estimator', views.estimator),
-] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

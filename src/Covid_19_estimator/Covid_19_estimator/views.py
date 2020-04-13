@@ -3,6 +3,9 @@ import requests
 from subprocess import run, PIPE
 import sys
 from django.template.context import RequestContext
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def index(request):
@@ -25,7 +28,7 @@ def estimator(request):
     totalHospitalBeds = request.POST.get('data-total-hospital-beds')
     
 
-    output = run([sys.executable,'/home/chrispine/Projects/Andela-Build-for-SDG/covid-19-estimator-py/src/Covid_19_estimator/estimator.py', name, avgAge, avgDailyIncomeInUSD, avgDailyIncomePopulation, periodType, timeToElapse, reportedCases, population, totalHospitalBeds],shell=False,stdout=PIPE, text=True)
+    output = run([sys.executable, os.path.join(BASE_DIR, 'estimator.py'), name, avgAge, avgDailyIncomeInUSD, avgDailyIncomePopulation, periodType, timeToElapse, reportedCases, population, totalHospitalBeds],shell=False,stdout=PIPE, text=True)
     print(output)
     return render(request,'index.html', {'data': output.stdout})
 
