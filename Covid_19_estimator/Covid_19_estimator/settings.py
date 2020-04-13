@@ -119,5 +119,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'/home/chrispine/Projects/Andela-Build-for-SDG/covid-19-estimator-py/src/Covid_19_estimator/static'),
+    os.path.join(BASE_DIR,'/home/chrispine/Projects/Andela-Build-for-SDG/covid-19-estimator-py/Covid_19_estimator/static'),
 ]
