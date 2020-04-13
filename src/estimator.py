@@ -1,17 +1,18 @@
 import math
+import sys
 
 data = {
     "region": {
-        "name": "Africa",
-        "avgAge": 19.7,
-        "avgDailyIncomeInUSD": 4,
-        "avgDailyIncomePopulation": 0.73
+        "name": (sys.argv[1]),
+        "avgAge": float(sys.argv[2]),
+        "avgDailyIncomeInUSD": float(sys.argv[3]),
+        "avgDailyIncomePopulation": float(sys.argv[4])
     },
-    "periodType": "days",
-    "timeToElapse": 38,
-    "reportedCases": 2747,
-    "population": 92931687,
-    "totalHospitalBeds": 678874
+    "periodType": (sys.argv[5]),
+    "timeToElapse": int(sys.argv[6]),
+    "reportedCases": int(sys.argv[7]),
+    "population": int(sys.argv[8]),
+    "totalHospitalBeds": int(sys.argv[9])
 }
 
 def impactEstimations(data):
@@ -51,7 +52,7 @@ def severeImpactEstimations(data):
 
     casesForVentilatorsByRequestedTime = int(0.02 * infectionsByRequestedTime)
 
-    dollarsInFlight = math.trunc((infectionsByRequestedTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) / days)
+    dollarsInFlight = math.trunc((infectionsByRequestedTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) // days)
 
     return [currentlyInfected, infectionsByRequestedTime, severeCasesByRequestedTime, hospitalBedsByRequestedTime, casesForICUByRequestedTime, casesForVentilatorsByRequestedTime, dollarsInFlight]
 
